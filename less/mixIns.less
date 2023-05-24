@@ -1,0 +1,22 @@
+.flexer(@dir){
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    flex-direction: @dir;
+  }
+  
+  .padd(@val){
+    padding: @val;
+    box-sizing: border-box;
+  }
+  
+  .grow(@val){
+    height: @val;
+  }
+  
+  .box(@color, @width, @height){
+    height: @height;
+    width: @width;
+    background-color: @color;
+  }

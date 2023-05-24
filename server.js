@@ -23,6 +23,9 @@ app.delete('/api/todos/:id', async(req, res, next)=> {
     const todo = await Todo.findByPk(req.params.id);
     await todo.destroy();
     res.sendStatus(204);
+    sockets.forEach( socket => {
+      socket.send(JSON.stringify({type: 'TODO_DESTROY', payload: todo}));
+    });
   }
   catch(ex){
     next(ex);
@@ -47,6 +50,9 @@ app.post('/api/todos', async(req, res, next)=> {
   try {
     const todo = await Todo.create(req.body);
     res.send(todo);
+    sockets.forEach( socket => {
+      socket.send(JSON.stringify({ type: 'TODO_CREATE', payload: todo}));
+    });
   }
   catch(ex){
     next(ex);
@@ -57,7 +63,6 @@ app.post('/api/categories', async(req, res, next)=> {
   try {
     const category = await Category.create(req.body);
     res.send(category);
-
     sockets.forEach( socket => {
       socket.send(JSON.stringify({ type: 'CATEGORY_CREATE', payload: category}));
     });
@@ -118,7 +123,6 @@ const socketServer = new ws.WebSocketServer({ server });
 socketServer.on('connection', (socket)=> {
   socket.send(JSON.stringify({ message: 'hello world'}));
   sockets.push(socket);
-  console.log(sockets.length);
 
   socket.on('close', ()=> {
     sockets = sockets.filter(s => s !== socket);

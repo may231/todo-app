@@ -1,0 +1,44 @@
+.todoList{
+    display: grid;
+    grid-auto-columns: max-content;
+   //grid-auto-flow: dense;
+    grid-auto-rows: minmax(100px, auto);
+    grid-gap: 25px;
+    grid-template-columns: repeat(3, 1fr);
+}
+  
+  #todo{
+    grid-column: span 1;
+    grid-row: span 1;
+    background-color: @sideColor;
+    color: navy;
+    padding: 0.2rem;
+  }
+
+  .cardHeader{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    height: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .todoButton{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #dc2626;
+    border-radius: 8px;
+    color: white;
+    height: 2rem;
+    width: 2rem;
+    line-height: 1rem;
+    text-decoration: none;
+    margin: 0 0.3rem 0 0.3rem;
+  }
+
+  #searchBar{
+    align-items: center;
+  }
+

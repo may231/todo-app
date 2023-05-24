@@ -69,6 +69,12 @@ const todosSlice = createSlice({
   name: 'todos',
   initialState: [],
   reducers: {
+    TODO_CREATE: (state, action)=> {
+      return [...state, action.payload];
+    },
+    TODO_DESTROY: (state, action)=> {
+      return state.filter(todo => todo.id !== action.payload.id);
+    }
   },
   extraReducers: (builder)=> {
     builder.addCase(fetchTodos.fulfilled, (state, action)=> {
@@ -120,7 +126,7 @@ const store = configureStore({
 });
 
 
-const socketActions = {...categoriesSlice.actions };
+const socketActions = {...categoriesSlice.actions, ...todosSlice.actions };
 
 export default store;
 

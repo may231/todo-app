@@ -14,7 +14,7 @@ const Search = ()=> {
   };
 
   return (
-    <div>
+    <div id='searchBar'>
       <input value={ term ? term : '' } placeholder='filter' onChange={ search }/>
     </div>
   );

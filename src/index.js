@@ -4,6 +4,8 @@ import axios from 'axios';
 import { Provider, useSelector, useDispatch } from 'react-redux';
 import store, { socketActions, createTodo, fetchTodos, fetchCategories } from './store';
 import { Link, HashRouter, Routes, Route } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPlusCircle } from '@fortawesome/free-solid-svg-icons'
 
 import Categories from './Categories';
 import Todos from './Todos';
@@ -36,10 +38,21 @@ function App() {
 
   return (
     <div>
-      <h1><Link to='/'>Acme Todos ({ todos.length })!!</Link></h1>
-      <Link to='/create'>Create A Todo</Link>
+      
+      <h1 id='header'><Link to='/'>Acme Todos ({ todos.length })!!</Link></h1>
+    
+      
       {' '}
-      <Link to='/categories/create'>Create A Category</Link>
+      
+ 
+      <div id='mainContainer'>
+        <div id='leftContainer'>
+      <Link to='/categories/create'><FontAwesomeIcon icon={faPlusCircle} />{' '}Create A Category</Link>
+      <Categories />
+      </div>
+      
+        <div id='rightContainer'>
+        <Link to='/create'><FontAwesomeIcon icon={faPlusCircle} /> {' '}Create A Todo</Link>
       <Routes>
         <Route path='/' element={ <Search /> } />
         <Route path='/search/:term' element={ <Search /> } />
@@ -52,7 +65,9 @@ function App() {
         <Route path='/create' element={ <TodoCreate /> } />
         <Route path='/categories/create' element={ <CategoryCreate /> } />
       </Routes>
-      <Categories />
+      </div>
+      
+      </div>
     </div>
   );
 }
